@@ -11,8 +11,7 @@ function [rota] = define_rota(formiga, cidades, feromonios, influencia_distancia
     for i=2:quantidade_cidades
         cidades_nao_visitadas = setdiff(cidades(:, 1), rota);
         cidade_atual = rota(i - 1);
-        proxima_cidade = calcula_proxima_cidade(cidades, feromonios, influencia_distancia, influencia_feromonio, cidade_atual, cidades_nao_visitadas);
-        rota(i) = proxima_cidade;
+        rota(i) = calcula_proxima_cidade(cidades, feromonios, influencia_distancia, influencia_feromonio, cidade_atual, cidades_nao_visitadas);
     end 
 
 end
@@ -31,7 +30,14 @@ function [proxima_cidade] = calcula_proxima_cidade(cidades, feromonios, influenc
         vetor_probabilidade(i) = termo_feromonios * termo_distancia;
     end
     
-    % TODO normalizar e girar a roleta
-    proxima_cidade = 1;
+    % Calcula o denominador do termo da probabilidade de cada cidade não
+    % visitada => sum_{k pertence a V} [Gamma_{ik}]^alpha x [eta_{ik}]^beta
+    soma_probabilidade = sum(vetor_probabilidade);
+    
+    vetor_probabilidade = (vetor_probabilidade / soma_probabilidade) * 100;
+    
+    indice_escolhido = roleta(vetor_probabilidade);
+    
+    proxima_cidade = cidades_nao_visitadas(indice_escolhido);
 
 end

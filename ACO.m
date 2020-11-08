@@ -36,7 +36,7 @@ function [melhor_rota] = ACO(D, delta0, delta, rho, alpha, beta)
         % Calcula a rota de cada formiga
         for formiga=1:quantidade_formigas
 
-            % TODO Define a rota R da formiga k
+            % Define a rota R da formiga k
             rota = define_rota(formiga, cidades, feromonios, influencia_distancia, influencia_feromonio);
 
             % TODO Calcula a distância total L percorrida pela formiga k
