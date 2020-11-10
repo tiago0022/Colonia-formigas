@@ -9,7 +9,3 @@ influencia_distancia = 1; % alfa
 influencia_feromonio = 1; % beta
 
 ACO(cidades, feromonio_inicial, feromonio_depositado, taxa_evaporacao, influencia_distancia, influencia_feromonio);
-
-
-
-

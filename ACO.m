@@ -61,22 +61,28 @@ function [melhor_rota] = ACO(D, delta0, delta, rho, alpha, beta)
 
         end
 
-        % TODO Calcula a nova quantidade de feromônios para cada arco
-        for i=1:quantidade_cidades
-            for j=1:quantidade_cidades
-                
-            end
-        end
+        % Atualização do feromônio
+        feromonios = (1-taxa_evaporacao)*feromonios + feromonios_acrescentados;
+       
 
         % Atualiza iteração
         vetor_melhores_distancias(iteracao) = melhor_distancia_total;
         iteracoes_com_mesma_solucao = iteracoes_com_mesma_solucao + 1;
         iteracao = iteracao + 1;
-
+        
+       
     end
 
-    % TODO Exibe gráfico de melhor distância por iteração
-
+    % Exibe gráfico de melhor distância por iteração
+    for i=1:size(vetor_melhores_distancias)
+        if vetor_melhores_distancias(i) == 0
+            plot(vetor_melhores_distancias(1:i-1),'x');
+            drawnow;
+            break;
+        end
+    end
+    
+    
     disp('Melhor rota encontrada:');
     disp(melhor_rota');
     disp('Distância total da melhor rota:');
